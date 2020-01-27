@@ -13,29 +13,25 @@ const Home: React.FunctionComponent<HomeProps> = () => {
         <a className="homePageLink" href="https://github.com/Joshykins">
           Joshykin's
         </a>{' '}
-        &{' '}
-        <a className="homePageLink" href="https://github.com/hexedcorp">
-          hexedcorp's
-        </a>{' '}
-        react boilerplate.
+        Mutli User Login.
       </h1>
       <p>
         Github{' '}
         <a
           className="homePageLink"
-          href="https://github.com/Joshykins/react-redux-ts-sc-boilerplate"
+          href="https://github.com/Joshykins/multi-user-jwt-boilerplate"
         >
-          react-redux-ts-sc-boilerplate
+          multi-user-jwt-boilerplate
         </a>
       </p>
-      <div className="homePageExample">
+      {/*<div className="homePageExample">
         <h2>Example counter component (uses global state management)</h2>
         <p>
           Look at <span className="homePageLink">./CounterExamples</span>{' '}
           directories in reducers, actions, and components for reference.
         </p>
         <CounterExample></CounterExample>
-      </div>
+      </div>*/}
     </section>
   );
 };

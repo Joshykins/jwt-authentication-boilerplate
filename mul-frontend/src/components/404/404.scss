@@ -1,0 +1,19 @@
+@import 'src/globals/globalStyling.scss';
+
+.notFound {
+  max-width: 1080px;
+  width: 95%;
+  margin: 0 auto;
+  background-color: $panelColor;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-top: 40px;
+  a {
+    color: $highlight;
+    text-decoration: none;
+    transition: 300ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    &:hover {
+      color: $hoverHighlight;
+    }
+  }
+}

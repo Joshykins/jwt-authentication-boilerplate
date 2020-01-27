@@ -1,0 +1,29 @@
+@import 'src/globals/globalStyling.scss';
+.nav {
+  $navSideWidth: 200px;
+  background-color: $backcolor;
+  border-bottom: 3px solid $panelColor;
+  color: black;
+  display: flex;
+  &Left {
+    display: flex;
+    box-sizing: border-box;
+    border-right: $panelColor 3px solid;
+    width: calc(100vw - #{$navSideWidth});
+  }
+  &Right {
+    width: $navSideWidth;
+    display: flex;
+  }
+  &Link {
+    padding: 15px;
+    font-family:$fontFamily1;
+    text-decoration: none;
+    color: $highlight;
+    transition: 300ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
+
+    &:hover {
+      color: $hoverHighlight;
+    }
+  }
+}

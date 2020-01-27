@@ -6,6 +6,7 @@ import App from './App';
 import { configureStore } from '../store/store';
 
 import '../globals/globalStyling.scss';
+import '../globals/globalStaticStyling.scss';
 
 const store = configureStore();
 

@@ -1,9 +1,20 @@
 @import "./reset.scss";
 
+
+
+$backcolor:rgba(34, 49, 63, 1);
+$panelColor:rgba(44, 62, 80,1);
+$highlight: #2ABB9B;
+$hoverHighlight: #2ECC71;
+$fontFamily1: 'Quicksand', sans-serif;
+$defaultPanelShadow: 3px 4px 15px rgba(0,0,0,.3);
+
+
 * {
-  font-family: 'Montserrat', sans-serif;
+  font-family: $fontFamily1;
   font-weight: 300;
   color: white;
+  z-index: 1;
 }
 a {
   color: rgba(10,100,255,1);
@@ -11,7 +22,8 @@ a {
 }
 html,
 body {
-  background: #333333;
+  background: $backcolor;
+  min-height: 100vh;
   h1 {
     color: #ffff;
   }
