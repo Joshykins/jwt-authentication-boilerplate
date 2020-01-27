@@ -3,5 +3,5 @@ mul-frontend/yarn.lock
 mul-frontend/package-lock.json
 mul-frontend/.awcache
 mul-frontend/.idea
-mul-frontend/.cache
+mul-frontend/.cache/
 mul-frontend/dist/
