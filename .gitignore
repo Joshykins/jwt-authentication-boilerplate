@@ -1,0 +1,6 @@
+mul-frontend/node_modules/
+mul-frontend/yarn.lock
+mul-frontend/package-lock.json
+mul-frontend/.awcache
+mul-frontend/.idea
+mul-frontend/dist/

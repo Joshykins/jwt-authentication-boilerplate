@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "tslint-eslint-rules",
+    "tslint-config-airbnb",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "object-literal-sort-keys": false,
+    "interface-over-type-literal": false,
+    "interface-name": false,
+    "no-implicit-dependencies": [true, "dev"],
+    "quotemark": [true, "single", "jsx-double"],
+    "variable-name": [true, "check-format", "allow-pascal-case"],
+    "no-console": false,
+    "forin": false,
+    "import-name": false
+  }
+}
