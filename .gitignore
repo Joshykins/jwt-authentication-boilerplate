@@ -5,3 +5,4 @@ mul-frontend/.awcache
 mul-frontend/.idea
 mul-frontend/.cache/
 mul-frontend/dist/
+mul-frontend/yarn-error.log
