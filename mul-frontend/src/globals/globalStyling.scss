@@ -1,7 +1,6 @@
 @import "./reset.scss";
 
 
-
 $backcolor:rgba(34, 49, 63, 1);
 $panelColor:rgba(44, 62, 80,1);
 $highlight: #2ABB9B;
@@ -27,4 +26,31 @@ body {
   h1 {
     color: #ffff;
   }
+}
+
+
+.panel {
+  max-width: 1080px;
+  width: 95%;
+  margin: 0 auto;
+  background-color: $panelColor;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-top: 40px;
+  box-shadow: $defaultPanelShadow;
+  &Link {
+    color: rgb(150,150,150);
+    transition: 300ms;
+    text-decoration: none;
+    &:Hover {
+      transition: 300ms cubic-bezier(0.075, 0.82, 0.165, 1) ;
+      color:$hoverHighlight;
+    }
+  }
+  /*&Example {
+    margin-top: 80px;
+    background-color: #333333*1.1;
+    padding: 20px;
+    box-sizing: border-box;
+  }*/
 }

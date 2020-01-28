@@ -7,10 +7,10 @@ export interface HomeProps {}
 
 const Home: React.FunctionComponent<HomeProps> = () => {
   return (
-    <section className="homePage">
+    <section className="panel">
       <h1>
         Welcome to the homepage of{' '}
-        <a className="homePageLink" href="https://github.com/Joshykins">
+        <a className="panelLink" href="https://github.com/Joshykins">
           Joshykin's
         </a>{' '}
         Mutli User Login.
@@ -18,7 +18,7 @@ const Home: React.FunctionComponent<HomeProps> = () => {
       <p>
         Github{' '}
         <a
-          className="homePageLink"
+          className="panelLink"
           href="https://github.com/Joshykins/multi-user-jwt-boilerplate"
         >
           multi-user-jwt-boilerplate
