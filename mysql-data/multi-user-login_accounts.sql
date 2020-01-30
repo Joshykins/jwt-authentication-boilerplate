@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `accounts` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `account_name` varchar(255) NOT NULL,
   `date_created` datetime NOT NULL,
-  `owner_id` int(10) unsigned NOT NULL,
+  `owner_id` int(10) unsigned,
   PRIMARY KEY (`id`),
   UNIQUE KEY `owner_id_UNIQUE` (`owner_id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
