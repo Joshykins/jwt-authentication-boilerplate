@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using mul.dtos;
+using mul.service.signup;
 
 namespace mul.api.Controllers
 {
@@ -23,6 +24,17 @@ namespace mul.api.Controllers
             else
             {
                 //Register in service
+                var RegistrationService = new Signup();
+                RegistrationService.SignupAccountAndUser(registerRequest);
+                if(RegistrationService.Errored)
+                {
+                    return BadRequest(RegistrationService.ErrorMessages);
+
+                }
+                else
+                {
+                    return Ok(RegistrationService.ErrorMessages);
+                }
             }
             return Ok("test");
         }
