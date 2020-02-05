@@ -15,7 +15,6 @@ namespace mul.data
         public DateTime? DateCreated { get; set; }
         public string Email { get; set; }
         public int? OwnerId { get; set; }
-
         public virtual Users Owner { get; set; }
         public virtual ICollection<Users> Users { get; set; }
     }

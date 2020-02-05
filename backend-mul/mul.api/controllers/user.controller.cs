@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using mul.dtos;
+using mul.service.authenticatation;
 using mul.service.signup;
 
 namespace mul.api.Controllers
@@ -21,22 +22,27 @@ namespace mul.api.Controllers
             {
                 return BadRequest(registerRequest.ErrorMessages);
             }
-            else
+            //Register in service
+            var RegistrationService = new Signup();
+            RegistrationService.SignupAccountAndUser(registerRequest);
+            if(RegistrationService.Errored)
             {
-                //Register in service
-                var RegistrationService = new Signup();
-                RegistrationService.SignupAccountAndUser(registerRequest);
-                if(RegistrationService.Errored)
-                {
-                    return BadRequest(RegistrationService.ErrorMessages);
+                return BadRequest(RegistrationService.ErrorMessages);
 
-                }
-                else
-                {
-                    return Ok(RegistrationService.ErrorMessages);
-                }
             }
-            return Ok("test");
+
+            //Authenticate and retrieve token
+            var authenticator = new Authenticator();
+            authenticator.AuthenticateSignin(registerRequest.Password, registerRequest.Email);
+            if(authenticator.Errored)
+            {
+                return BadRequest(RegistrationService.ErrorMessages);
+            }
+
+
+            return Ok(authenticator.Token);
+                
+       
         }
     }
 }

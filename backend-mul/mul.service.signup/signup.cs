@@ -6,15 +6,12 @@ using mul.data;
 
 namespace mul.service.signup
 {
-    public class Signup
+    public class Signup : ErrorDto
     {
-        public bool Errored { get; set; } = false;
-        public List<string> ErrorMessages { get; set; } = new List<string> { };
-
-        public Users? SignupAccountAndUser(RegisterDto registration)
+        public void SignupAccountAndUser(RegisterDto registration)
         {
             //Encrypt Password
-            registration.Password = BCrypt.Net.BCrypt.HashPassword(registration.Password, 12);
+            registration.Password = BCrypt.Net.BCrypt.HashPassword(registration.Password);
             //.verify for checking
             var time = DateTime.UtcNow;
 

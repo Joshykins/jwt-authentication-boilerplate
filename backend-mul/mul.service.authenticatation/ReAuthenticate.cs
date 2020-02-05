@@ -2,7 +2,7 @@
 
 namespace mul.service.authenticatation
 {
-    public class Class1
+    public class ReAuthenticate
     {
     }
 }
