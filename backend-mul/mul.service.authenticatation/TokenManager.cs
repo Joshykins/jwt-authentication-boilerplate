@@ -26,11 +26,11 @@ namespace mul.service.authenticatation
         //Creates new tokens
         public string CreateToken(int userId)
         {
-            string payload = JsonConvert.SerializeObject(new TokenContent
+            var payload = new TokenContent
             {
                 ExpirationDate = DateTimeOffset.UtcNow.AddHours(336),
                 UserId = userId
-            });
+            };
 
             IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
             IJsonSerializer serializer = new JsonNetSerializer();

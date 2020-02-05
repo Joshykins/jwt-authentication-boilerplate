@@ -20,6 +20,10 @@ namespace mul.dtos
             //Check nulls
             // No more 255
             signinDto = AllFieldsFilled(signinDto);
+            if(signinDto.Errored)
+            {
+                return signinDto;
+            }
             //Email passes regex
             signinDto = ValidEmail(signinDto);
             //Regex

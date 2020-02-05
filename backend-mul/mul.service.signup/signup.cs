@@ -10,6 +10,7 @@ namespace mul.service.signup
     {
         public void SignupAccountAndUser(RegisterDto registration)
         {
+
             //Encrypt Password
             registration.Password = BCrypt.Net.BCrypt.HashPassword(registration.Password);
             //.verify for checking

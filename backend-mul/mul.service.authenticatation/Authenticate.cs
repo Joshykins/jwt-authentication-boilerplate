@@ -7,6 +7,7 @@ using JWT;
 using System.Text;
 using JWT.Builder;
 using JWT.Algorithms;
+using BCrypt.Net;
 
 namespace mul.service.authenticatation
 {
@@ -35,11 +36,10 @@ namespace mul.service.authenticatation
 
 
                     //Verify password
-                    if (BCrypt.Net.BCrypt.InterrogateHash(password).RawHash
-                        != BCrypt.Net.BCrypt.InterrogateHash(user.Password).RawHash)
+                    if (BCrypt.Net.BCrypt.Verify(password, user.Password))
                     {
                         Errored = true;
-                        ErrorMessages.Add("Passwords do not match.");
+                        ErrorMessages.Add( BCrypt.Net.BCrypt.HashPassword(password) + "Passwords do not match. " + user.Password);
                         return;
                     }
 
