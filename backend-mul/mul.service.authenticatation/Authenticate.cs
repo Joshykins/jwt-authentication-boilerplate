@@ -10,7 +10,7 @@ using JWT.Algorithms;
 
 namespace mul.service.authenticatation
 {
-    public class Authenticator : ErrorDto
+    public class Authenticater : ErrorDto
     {
         public AuthenticatedDto Token { get; set; }
         public void AuthenticateSignin(string password, string email)
@@ -18,6 +18,8 @@ namespace mul.service.authenticatation
             
             using ( var context = new mulContext() )
             {
+
+                //Find account via email
                 bool matchedWithEmail = context.Users.Any(o => o.Email == email.ToLower());
                 if(!matchedWithEmail)
                 {
@@ -29,7 +31,8 @@ namespace mul.service.authenticatation
                 var user = context.Users.FirstOrDefault(o => o.Email == email.ToLower());
 
 
-                if(BCrypt.Net.BCrypt.InterrogateHash(password).RawHash 
+                //Verify password
+                if (BCrypt.Net.BCrypt.InterrogateHash(password).RawHash 
                     != BCrypt.Net.BCrypt.InterrogateHash(user.Password).RawHash)
                 {
                     Errored = true;
@@ -39,27 +42,21 @@ namespace mul.service.authenticatation
 
 
                 var tokenManager = new TokenManager();
+                //Pull Authorization Data
+                var authorizer = new Authorizer();
+                Authorization authorizationData = authorizer.GetAuthorization(context, user);
 
-                //Get authorization Data
-                bool owner = context.Accounts.FirstOrDefault(o=>o.Id == user.AccountId).OwnerId == user.Id;
+                //Generate Token
                 string token = tokenManager.CreateToken(user.Id);
                 
-
+                //Create data transfer object
                 Token = new AuthenticatedDto
                 {
                     Token = token,
-                    Authorized = new Authorization
-                    {
-                        Owner = owner
-                    }
+                    Authorized = authorizationData
                 };
-
+                //Signup done, send DTO back
             }
-            //Find account via email
-            //Verify password
-            //Pull Authentication Data
-            //Pull Authorization Data
-            //Generate Token
 
 
         }
