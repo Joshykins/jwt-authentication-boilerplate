@@ -14,7 +14,7 @@ namespace mul.api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        [HttpGet("signup")]
+        [HttpPost("signup")]
         public ActionResult RegisterAPI(RegisterDto registerRequest)
         {
             registerRequest = SanitizeRegisterDto.Sanitize(registerRequest);
@@ -32,17 +32,34 @@ namespace mul.api.Controllers
             }
 
             //Authenticate and retrieve token
-            var authenticator = new Authenticator();
+            var authenticator = new Authenticater();
             authenticator.AuthenticateSignin(registerRequest.Password, registerRequest.Email);
             if(authenticator.Errored)
             {
-                return BadRequest(RegistrationService.ErrorMessages);
+                return BadRequest(authenticator.ErrorMessages);
             }
 
+            return Ok(authenticator.Token);
+        }
+        [HttpPost("signin")]
+        public ActionResult signin(SigninDto signinRequest)
+        {
+            signinRequest = SanitizeSigninDto.Sanitize(signinRequest);
+            if(signinRequest.Errored)
+            {
+                return BadRequest(signinRequest.ErrorMessages);
+            }
+
+            //Authenticate and retrieve token
+            var authenticator = new Authenticater();
+            authenticator.AuthenticateSignin(signinRequest.Password, signinRequest.Email);
+            if (authenticator.Errored)
+            {
+                return BadRequest(authenticator.ErrorMessages);
+            }
 
             return Ok(authenticator.Token);
-                
-       
+
         }
     }
 }

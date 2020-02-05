@@ -13,9 +13,9 @@ namespace mul.service.authenticatation
             //Verify token
             var tokenManager = new TokenManager();
             TokenContent tokenContent = tokenManager.VerifyToken(inputToken);
-            
+
             //Check if verification worked
-            if(tokenManager.Errored)
+            if (tokenManager.Errored)
             {
                 Errored = true;
                 ErrorMessages.Add(tokenManager.ErrorMessage);
@@ -34,7 +34,7 @@ namespace mul.service.authenticatation
                     authorizationData = authorizer.GetAuthorization(context, user);
                 }
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             {
                 Errored = true;
                 ErrorMessages.Add(Ex.Message);
@@ -51,4 +51,5 @@ namespace mul.service.authenticatation
 
 
         }
+    }
 }

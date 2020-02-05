@@ -16,107 +16,112 @@ namespace mul.dtos
 
     static public class SanitizeRegisterDto
     {
-        public static RegisterDto Sanitize(RegisterDto RegisterDto)
+        public static RegisterDto Sanitize(RegisterDto registerDto)
         {
             //Checks if all are not null
             //TODO: Compare against records
-            RegisterDto = AllFieldsFilled(RegisterDto);
-            if (RegisterDto.Errored)
+            registerDto = AllFieldsFilled(registerDto);
+            if (registerDto.Errored)
             {
                 //Escape here due to potential nulls
-                return RegisterDto;
+                return registerDto;
             }
 
             //Checks if is valid email
             //Not more than 255 char
-            RegisterDto = ValidEmail(RegisterDto);
+            registerDto = ValidEmail(registerDto);
             //Not more than 255 char 
-            RegisterDto = ValidFirstname(RegisterDto);
+            registerDto = ValidFirstname(registerDto);
             //Not more than 255 char 
-            RegisterDto = ValidLastname(RegisterDto);
+            registerDto = ValidLastname(registerDto);
             //Regex
             //must container lowercase
             //must container uppercase
             //must be 8 characters long
             //Not more than 255 char
-            RegisterDto = ValidPassword(RegisterDto);
+            registerDto = ValidPassword(registerDto);
 
-            return RegisterDto;
+            return registerDto;
         }
 
-        private static RegisterDto AllFieldsFilled(RegisterDto RegisterDto)
+        private static RegisterDto AllFieldsFilled(RegisterDto registerDto)
         {
-            if (RegisterDto.FirstName == null || RegisterDto.FirstName == "")
+            if (registerDto.FirstName == null || registerDto.FirstName == "")
             {
-                RegisterDto.Errored = true;
-                RegisterDto.ErrorMessages.Add("Firstname can't be be left empty.");
+                registerDto.Errored = true;
+                registerDto.ErrorMessages.Add("Firstname can't be be left empty.");
             }
-            if (RegisterDto.LastName == null || RegisterDto.LastName == "")
+            if (registerDto.LastName == null || registerDto.LastName == "")
             {
-                RegisterDto.Errored = true;
-                RegisterDto.ErrorMessages.Add("Lastname can't be be left empty.");
+                registerDto.Errored = true;
+                registerDto.ErrorMessages.Add("Lastname can't be be left empty.");
             }
             //Phoennumber can be null
-            if (RegisterDto.Password == null || RegisterDto.Password == "")
+            if (registerDto.Password == null || registerDto.Password == "")
             {
-                RegisterDto.Errored = true;
-                RegisterDto.ErrorMessages.Add("Password can't be left empty");
+                registerDto.Errored = true;
+                registerDto.ErrorMessages.Add("Password can't be left empty");
+            }
+            if(registerDto.Email == null || registerDto.Email == "")
+            {
+                registerDto.Errored = true;
+                registerDto.ErrorMessages.Add("Email can't be left empty");;
             }
 
-            return RegisterDto;
+            return registerDto;
         }
 
 
-        private static RegisterDto ValidPassword(RegisterDto RegisterDto)
+        private static RegisterDto ValidPassword(RegisterDto registerDto)
         {
             Regex mustContainLowercase = new Regex(@"^(?=.*[a-z])");
             Regex mustContainUppercase = new Regex(@"^(?=.*[A-Z])");
             Regex mustContainNumber = new Regex(@"[0-9]+");
 
-            if (!mustContainLowercase.Match(RegisterDto.Password).Success)
+            if (!mustContainLowercase.Match(registerDto.Password).Success)
             {
-                RegisterDto.Errored = true;
-                RegisterDto.ErrorMessages.Add("Password must contain a lowercase character.");
+                registerDto.Errored = true;
+                registerDto.ErrorMessages.Add("Password must contain a lowercase character.");
             }
-            if (!mustContainUppercase.Match(RegisterDto.Password).Success)
+            if (!mustContainUppercase.Match(registerDto.Password).Success)
             {
-                RegisterDto.Errored = true;
-                RegisterDto.ErrorMessages.Add("Password must contain a uppercase character.");
+                registerDto.Errored = true;
+                registerDto.ErrorMessages.Add("Password must contain a uppercase character.");
             }
-            if (!mustContainNumber.Match(RegisterDto.Password).Success)
+            if (!mustContainNumber.Match(registerDto.Password).Success)
             {
-                RegisterDto.Errored = true;
-                RegisterDto.ErrorMessages.Add("Password must contain a number.");
+                registerDto.Errored = true;
+                registerDto.ErrorMessages.Add("Password must contain a number.");
             }
-            if (RegisterDto.Password.Length < 8)
+            if (registerDto.Password.Length < 8)
             {
-                RegisterDto.Errored = true;
-                RegisterDto.ErrorMessages.Add("Password must be at least 8 characters long.");
+                registerDto.Errored = true;
+                registerDto.ErrorMessages.Add("Password must be at least 8 characters long.");
             }
-            return RegisterDto;
+            return registerDto;
         }
 
-        private static RegisterDto ValidFirstname(RegisterDto RegisterDto)
+        private static RegisterDto ValidFirstname(RegisterDto registerDto)
         {
-            if (RegisterDto.FirstName.Length > 255)
+            if (registerDto.FirstName.Length > 255)
             {
-                RegisterDto.Errored = true;
-                RegisterDto.ErrorMessages.Add("First Name Too Longh");
+                registerDto.Errored = true;
+                registerDto.ErrorMessages.Add("First Name Too Longh");
             }
 
-            return RegisterDto;
+            return registerDto;
         }
 
 
-        private static RegisterDto ValidLastname(RegisterDto RegisterDto)
+        private static RegisterDto ValidLastname(RegisterDto registerDto)
         {
-            if (RegisterDto.LastName.Length > 255)
+            if (registerDto.LastName.Length > 255)
             {
-                RegisterDto.Errored = true;
-                RegisterDto.ErrorMessages.Add("First Name Too Longh");
+                registerDto.Errored = true;
+                registerDto.ErrorMessages.Add("First Name Too Longh");
             }
 
-            return RegisterDto;
+            return registerDto;
         }
 
 
