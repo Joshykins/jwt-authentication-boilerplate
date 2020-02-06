@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\mul.data\mul.data.csproj" />
     <ProjectReference Include="..\mul.dtos\mul.dtos.csproj" />
+    <ProjectReference Include="..\mul.service.authenticatation\mul.service.authenticatation.csproj" />
   </ItemGroup>
   
 </Project>

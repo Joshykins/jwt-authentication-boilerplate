@@ -7,10 +7,10 @@ using JWT;
 using System.Text;
 using JWT.Builder;
 using JWT.Algorithms;
-using BCrypt.Net;
 
 namespace mul.service.authenticatation
 {
+    using BCrypt.Net;
     public class Authenticater : ErrorDto
     {
         public AuthenticatedDto Token { get; set; }
@@ -36,13 +36,12 @@ namespace mul.service.authenticatation
 
 
                     //Verify password
-                    if (BCrypt.Net.BCrypt.Verify(password, user.Password))
+                    if (!BCrypt.Verify(password, user.Password))
                     {
                         Errored = true;
-                        ErrorMessages.Add( BCrypt.Net.BCrypt.HashPassword(password) + "Passwords do not match. " + user.Password);
+                        ErrorMessages.Add("Passwords do not match");
                         return;
                     }
-
 
                     var tokenManager = new TokenManager();
                     //Pull Authorization Data

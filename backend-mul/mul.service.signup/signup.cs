@@ -6,13 +6,14 @@ using mul.data;
 
 namespace mul.service.signup
 {
+    using BCrypt.Net;
     public class Signup : ErrorDto
     {
         public void SignupAccountAndUser(RegisterDto registration)
         {
 
             //Encrypt Password
-            registration.Password = BCrypt.Net.BCrypt.HashPassword(registration.Password);
+            string pass = BCrypt.HashPassword(registration.Password);
             //.verify for checking
             var time = DateTime.UtcNow;
 
@@ -29,7 +30,7 @@ namespace mul.service.signup
                 LastName = registration.LastName,
                 DateCreated = time,
                 Email = registration.Email,
-                Password = registration.Password
+                Password = pass
             };
 
             using (var context = new mulContext())
