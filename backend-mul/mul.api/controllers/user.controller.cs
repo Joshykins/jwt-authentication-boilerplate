@@ -18,14 +18,14 @@ namespace mul.api.Controllers
         public ActionResult RegisterAPI(RegisterDto registerRequest)
         {
             registerRequest = SanitizeRegisterDto.Sanitize(registerRequest);
-            if(registerRequest.Errored)
+            if (registerRequest.Errored)
             {
                 return BadRequest(registerRequest.ErrorMessages);
             }
             //Register in service
             var RegistrationService = new Signup();
             RegistrationService.SignupAccountAndUser(registerRequest);
-            if(RegistrationService.Errored)
+            if (RegistrationService.Errored)
             {
                 return BadRequest(RegistrationService.ErrorMessages);
 
@@ -34,22 +34,22 @@ namespace mul.api.Controllers
             //Authenticate and retrieve token
             var authenticator = new Authenticater();
             authenticator.AuthenticateSignin(registerRequest.Password, registerRequest.Email);
-            if(authenticator.Errored)
+            if (authenticator.Errored)
             {
                 return BadRequest(authenticator.ErrorMessages);
             }
 
             return Ok(authenticator.Token);
         }
+
         [HttpPost("signin")]
-        public ActionResult signin(SigninDto signinRequest)
+        public ActionResult SigninAPI(SigninDto signinRequest)
         {
             signinRequest = SanitizeSigninDto.Sanitize(signinRequest);
-            if(signinRequest.Errored)
+            if (signinRequest.Errored)
             {
                 return BadRequest(signinRequest.ErrorMessages);
             }
-
             //Authenticate and retrieve token
             var authenticator = new Authenticater();
             authenticator.AuthenticateSignin(signinRequest.Password, signinRequest.Email);
@@ -57,9 +57,24 @@ namespace mul.api.Controllers
             {
                 return BadRequest(authenticator.ErrorMessages);
             }
-
             return Ok(authenticator.Token);
-
         }
+
+        [HttpGet("reauth")]
+        public ActionResult ReAuthAPI(AuthenticatedDto tokenSubmition)
+        {
+            //Authenticate and retrieve token
+            var reAuthenticator = new ReAuthenticator();
+            tokenSubmition = reAuthenticator.Authenticate(tokenSubmition.Token);
+            if (reAuthenticator.Errored)
+            {
+                return BadRequest(reAuthenticator.ErrorMessages);
+            }
+            return Ok(tokenSubmition);
+        }
+    }
+    public class Test
+    {
+        public string Token { get; set; }
     }
 }
